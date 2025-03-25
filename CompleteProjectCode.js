@@ -72,6 +72,182 @@ function contactDetails(firstName,lastName,address,state,city,zipCode,email,phon
 }
 
 //UC3 
-contactDetails('Kushagra', 'Sharma', 'Home', 'Uttar Pradesh', 'Agra', "282005", 'kushagra@gmail.com', "3342532525");
+contactDetails('Alex', 'Jordan', 'Home', 'Europe', 'Itly', "180892", 'alex@gmail.com', "6362829303");
 console.log(addressBook);
 
+//UC4
+
+//method to find and editContacts
+function editContact(findName,editedVariable,variableNewValue){
+    if(addressBook.length == null){
+        console.log("Add Contact In Address Book");
+    }else{
+        addressBook.forEach(newContact => {
+            if(newContact.firstName == findName){
+                switch(editedVariable){
+                    case "firstName":
+                        newContact.firstName = variableNewValue;
+                        break;
+                    case "lastName":
+                        newContact.lastName = variableNewValue;
+                        break;
+                    case "address":
+                        newContact.address = variableNewValue;
+                        break;
+                    case "state":
+                        newContact.state = variableNewValue;
+                        break;
+                    case "city":
+                        newContact.city = variableNewValue;
+                        break;
+                    case "zipCode":
+                        newContact.zipCode = variableNewValue;
+                        break;  
+                    case "firstName":
+                        newContact.firstName = variableNewValue;
+                        break;
+                    case "lastName":
+                        newContact.lastName = variableNewValue;
+                        break;      
+                }
+            }
+        })
+    }
+}
+
+//UC5
+
+//method to delete
+function deleteContact(first_Name){
+    if(addressBook.length == null){
+        console.log("Add Contact In Address Book");
+    }else{
+        for(let i = 0; i <addressBook.length ; i++){
+            if(addressBook[i].firstName == first_Name){
+                addressBook.splice(i,1);
+                console.log("Contact Deleted Successfully");
+            }
+        }
+    }
+}
+
+//UC 6
+
+//creating a function to calculate number of contacts in addressbook using reduce() method
+function numberOfContacts(){
+    return addressBook.reduce((total)=>total+1, 0);
+}
+
+console.log("Total number of contacts inside address book is : "+numberOfContacts());
+
+// UC7
+
+//method for Duplicate Check Function
+function isDuplicate(firstName) {
+    // Filter matching names
+    let duplicates = addressBook.filter(contact => contact.firstName === firstName);
+    // Reduce to count duplicates
+    let duplicateCount = duplicates.reduce((count) => count + 1, 0);
+    return duplicateCount > 0;
+}
+
+//UC 8
+
+ // method to Search Contact 
+ function searchByCity_State(choice , name){
+    if(choice == "city"){
+        person = addressBook.filter(contact => contact.city == name)
+        .map(contact => contact.firstName);
+        console.log("Contact Found Who Is From "+name);
+        console.log(person);
+    }else if(choice == "state"){
+        person = addressBook.filter(contact => contact.state == name)
+        .map(contact => contact.firstName);
+        console.log("Contact Found Who Is From "+name);
+        console.log(person);
+    }else{
+        console.log("Provide Right City or State Name");
+    }
+}
+
+//UC 9
+
+ //method created to View Contact
+ 
+ function viewByCityOrState(choice , name){
+    if(choice == "city"){
+        person = addressBook.filter(contact => contact.city == name)
+        console.log("Contact Found Who Is From "+name);
+        console.log(person);
+    }else if(choice == "state"){
+        person = addressBook.filter(contact => contact.state == name)
+        console.log("Contact Found Who Is From "+name);
+        console.log(person);
+    }else{
+        console.log("Provide Right City or State Name");
+    }
+}
+
+//UC 10
+
+//count contact
+function countContactInCity_State(choice , name){
+    if(choice == "city"){
+        person = addressBook.filter(contact => contact.city == name)
+        .reduce(() => { count++;},count = 0);
+        console.log("Total Number Of Contact Found Who Is From "+name+" Are " +count);
+    }else if(choice == "state"){
+        person = addressBook.filter(contact => contact.state == name)
+        .reduce(() => { count++;},count = 0);
+        console.log("Total Number Of Contact Found Who Is From "+name+" Are " +count);
+    }else{
+        console.log("Provide Right City or State Name");
+    }
+}
+
+//UC 11
+
+//sorting contacts by name
+function sortContact(choice){
+    console.log(addressBook.sort((newContact1,newContact2) => {
+        if(newContact1.firstName < newContact2.firstName){
+            return -1;
+        }else if(newContact1.firstName == newContact2.firstName){
+            return 0;
+        }else{
+            return 1;
+        }
+    }));
+}
+
+//UC 12
+
+//sorting 
+function sortContact(choice){
+    console.log(addressBook.sort((newContact1,newContact2) => {
+        switch(choice){
+            case "city":
+                one = newContact1.city;
+                two = newContact2.city;
+                break;
+            case  "state":
+                one = newContact1.state;
+                two = newContact2.state;
+                break;
+            case "zipCode":
+                one = newContact1.zipCode;
+                two = newContact2.zipCode;
+                break;
+            default:
+                console.log("Provide Valid Input city or state or zipCode")
+        }
+   
+        if(one < two){
+            return -1;
+        }else if(one == two){
+            return 0;
+        }else{
+            return 1;
+        }
+    }));
+}
